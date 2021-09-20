@@ -29,3 +29,14 @@ GET /admin/delete?username=carlos HTTP/1.1
 ...
 X-Custom-IP-Authorization: 127.0.0.1
 ```
+
+
+# Lab: Information disclosure in version control history
+
+First we downlaod the full git repository using the command:
+
+```
+wget -r TARGET.COM/.git
+```
+
+Then use git show to see the changes, where there is a commit that deleted the admin password - with the password
