@@ -41,7 +41,7 @@ wiener:51dc30ddc473d43a6011e9ebba6ca770
 ```
 
 We can identify that the latter (after the username) is MD5 hash, possibly for the password for weiner, now we will use the request:
-```
+```http
 GET /my-account HTTP/1.1
 Host: aced1f021fe7a8318022593e00d9000f.web-security-academy.net
 Cookie: stay-logged-in=d2llbmVyOjUxZGMzMGRkYzQ3M2Q0M2E2MDExZTllYmJhNmNhNzcw; session=tudvBq62ELO1glvnWxA1k3NLSO3qxTGb
